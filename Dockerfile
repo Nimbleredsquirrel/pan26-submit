@@ -16,7 +16,7 @@ COPY models/ ./models/
 COPY predict.py .
 COPY catboost_model.pkl .
 
-COPY deberta/deberta_v2_best.pt .
+COPY deberta_v2_best.pt .
 
 # cache DeBERTa tokenizer + model weights at build time so inference is fully offline
 RUN python -c "\
