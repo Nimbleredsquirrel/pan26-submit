@@ -33,12 +33,15 @@ def write_jsonl(path, ids, scores):
 
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) == 3:
+        input_dir = Path(sys.argv[1])
+        output_dir = Path(sys.argv[2])
+    elif os.environ.get("inputDataset") and os.environ.get("outputDir"):
+        input_dir = Path(os.environ["inputDataset"])
+        output_dir = Path(os.environ["outputDir"])
+    else:
         print("usage: predict.py <input_dir> <output_dir>", file=sys.stderr)
         sys.exit(1)
-
-    input_dir = Path(sys.argv[1])
-    output_dir = Path(sys.argv[2])
     output_dir.mkdir(parents=True, exist_ok=True)
 
     records = load_jsonl(input_dir / "dataset.jsonl")
